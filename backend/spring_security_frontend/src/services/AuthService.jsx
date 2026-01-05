@@ -10,6 +10,8 @@ const API="http://localhost:8080/auth";
     let userData=res.data.data;
     localStorage.setItem('token',userData.token);
     localStorage.setItem('role',userData.role);
+    localStorage.setItem('email',userData.email);
+    localStorage.setItem('name',userData.name);
     axios.defaults.headers.common['Authorization']=`Bearer ${userData.token}`;
     return res;
 }

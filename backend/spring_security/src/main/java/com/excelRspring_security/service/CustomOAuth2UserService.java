@@ -39,7 +39,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             User newUser = new User();
             newUser.setEmail(email);
             newUser.setPassword(" ");
-            newUser.setRole("USER");
+            newUser.setRole("STUDENT");
             newUser.setPhone(0);
             userRepo.save(newUser);
         } else {

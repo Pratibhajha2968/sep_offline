@@ -14,6 +14,8 @@ const Login = () => {
       email: emailRef.current.value,
       password: passwordRef.current.value
     }
+    console.log(credentials);
+    
     loginUser(credentials)
     .then((res) => {
       if (res.status === 200) {

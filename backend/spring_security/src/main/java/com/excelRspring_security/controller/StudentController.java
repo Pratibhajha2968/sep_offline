@@ -4,20 +4,25 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.excelRspring_security.dao.UserDao;
 import com.excelRspring_security.entity.User;
 
-@RestController("/student")
+@RestController
+@RequestMapping("/student")
 public class StudentController {
     @Autowired
 	UserDao dao;
     @GetMapping("/profile")
-	public ResponseEntity<User>fetchProfile( @RequestBody UserDetails details){
+	public ResponseEntity<?>fetchProfile(@AuthenticationPrincipal UserDetails details){
 		 String email=details.getUsername();
 		 Optional<User> user = dao.fetchByEmail(email);
 		 System.out.println(user);
@@ -25,6 +30,14 @@ public class StudentController {
 			 User data=user.get();
 			 return ResponseEntity.ok(data);
 		 }
-		 return null;
+		 return ResponseEntity.badRequest().body("Not Found");
 	}
 }
+
+
+	
+	
+	
+	
+	
+	
