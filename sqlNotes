@@ -220,6 +220,13 @@ FUNCTIONS
                      select current_date- gets current data
                      select current_time-gets current time
                      select current_timestamp - gets current timestamp 
-
+   4.Math Functions:
+       1.abs()-> returns the absolute value of a 9*/9+number
+       2.ceil()-> returns the smallest integer greater than or equal to a number
+       3.floor()-> returns the largest integer less than or equal to a number
+       4.round()-> returns the nearest integer to a number
+       5.sign()-> returns the sign of a number
+       6.mod()-> returns the remainder of a number divided by another number
+       7.Power()/pow()-> returns the value of a number raised to the power of another number
                    
 
