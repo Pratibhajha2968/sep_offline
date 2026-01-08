@@ -229,4 +229,37 @@ FUNCTIONS
        6.mod()-> returns the remainder of a number divided by another number
        7.Power()/pow()-> returns the value of a number raised to the power of another number
                    
+Subquery:
+--------
+          - used to find data that belongs to itself or other table
+          - writing query inside another query 
+
+Q.WAQTP the location details of blake
+A.select loc from scott.dept where DEPTNO=( select DEPTNO from scott.emp where ename='BLAKE') ;
+
+Q.WAQTP the employee details whose belongs to Chicago location
+select * from scott.emp where deptno=(select deptno from scott.dept where loc='CHICAGO');
+
+Q.WAQTP the manager of blake
+select * from scott.emp where empno=(select mgr from scott.emp where ename='BLAKE');
+
+Q.WAQTP the employee details whose salary similar with ford
+select * from scott.emp where sal=(select sal from scott.emp where ename='FORD');
+
+Q.WAQTP the employee details whose belongs to SALES department
+select * from scott.emp where depno=(select deptno from scott.dept where dname='SALES');
+
+
+group by:
+----------
+          group by is a clause used to group the records
+Q.WAQTP the count of employee whose belongs to each department
+A.select count(*) as count, deptno from scott.emp group by deptno ;
+
+ 
+
+
+
+
+
 
