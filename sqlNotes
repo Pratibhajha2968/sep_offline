@@ -1,0 +1,225 @@
+SQL: structured query language
+----------------------------------
+
+DATA : collection of information 
+Database: container/place where we can store data
+          1.Relational Database(tables)
+          2.Non-Relational Database(documents/objects)
+          3.Graph Databases(graphs)
+
+DBMS(software):  database management system
+       flat like , tree like , graph like, rdbms(tables)
+
+
+table/entity- rows and columns
+             - column(attribute/field)
+             - row(record)
+
+Data types: 1.Numeric
+            2.character
+            3.Data and Time
+            4.Logical Data Types
+
+
+show databases;
+use database_Name;
+show tables;
+desc table_Name/show fields in table_Name/show columns in table_Name;
+
+
+
+
+
+DDL : data definition language
+     ->create 
+     ->alter
+     ->rename
+     ->drop
+     ->truncate     
+
+database:
+---------
+         1.to read : show databases;
+         2.to create: create database database_Name;
+         3.to delete: drop database database_Name;
+         4.to use: use database_Name;  
+
+Table:
+------
+      1.to create : 
+            Datatypes: what type of data need to store
+            constraint: provides extra information about column 
+          create table student(
+             col_NAME1 data_type constraint,
+             col_NAME2 data_type constraint,
+
+          )
+      2.to alter a columns:
+           1.add a column:
+                 alter table table_Name 
+                 add (col_NAME2 data_type constraint);
+
+           2.Rename a column:
+                alter table table_Name
+                rename column oldColumnName to newColumnName 
+          
+           3.delete a column 
+                alter table table_Name
+                drop column ColumnName  
+
+     3.to rename a table:
+           rename table oldTableName to newTableName;
+      
+     4.to delete a table:
+           drop table table_Name; (entire table will delete)
+                 or
+           truncate table tale_Name;(records will delete but table structure remains same) 
+ 
+===================================================================================================
+
+DML : Data Manipulation Language
+      ->insert
+      ->update
+      ->delete 
+      
+insert : insert into tableName
+         values(__,__,___,__);  // values count need to match with column count 
+               or
+          insert into tableName (col1,col2,col4)
+         values(val1,val2,val4); 
+           or
+          insert into tableName 
+          values(__,__,___,__),
+          values(__,__,___,__),
+          values(__,__,___,__);
+
+update : update tableName set colName=value ,colName=value where condition;
+
+delete : delete from tableName where condition ; // based on condition it will delete record
+         delete from tableName ;//it will delete entire table records 
+  
+
+==================================================================================================
+DQL: Data Query language
+     (Reading data)
+      ->select
+      ->joins 
+      ->sub queries and co related sub queries  
+
+
+
+    select * from table_Name; -- to read all records
+    select colName1,colName2 from table_Name;---to read respective records
+
+aliasing : to change column Name
+--------
+      select colName  as customName from table_Name;
+  
+Operators:
+---------
+         Arithmetic Operator :+ ,-,*,/,% or mod()
+
+literals: data/value
+--------
+         1.number---1,2, 
+         2.String----''
+         3.Data and Time -- ''
+        
+concatenation: combining/joining data
+------------- 
+             :||(double vertical pipes)
+             :concat(,)
+   Q.WAQTP MY NAME IS COL 
+   A. select 'MY NAME IS '||FIRST_NAME from hr.employees;
+                        or
+      select concat('MY NAME IS ',FIRST_NAME) from hr.employees;
+
+order by: order by clause will print data in an order 
+--------
+   Q.WAQTP employee salaray based on ascending order  
+   A. select first_name,salary from hr.employees order by salary; // default is ascending order
+                or
+      select first_name,salary from hr.employees order by salary asc 
+                or
+      select first_name,salary from hr.employees order by salary desc
+
+   Q.WAQTP all the emp details in the ascending order based on dept number and descending order based on salary
+   A.select * from hr.employees order by DEPARTMENT_ID , salary desc; 
+
+where: where is a clause used for condition 
+------
+      1.Relational Operator(<,>,>=,>=,=,!= or <>)
+      2.Logical operator(and ,or , not)
+      3.special operator(in,between ,is ,like )
+
+     Q.WAQTP whose salary is more than 3000;
+     A.select * from scott.emp where sal>3000;
+     Q.WAQTP whose salary is more than 2000 in descending order;
+     A.select * from scott.emp where sal>2000 order by sal desc;
+     Q.WAQTP employee who joined before 1980;
+     A.select * from scott.emp where hiredate<'MM-DD-YYYY'
+     Q.WAQTP employee whose job is manager and ename is blake
+     A.select * from scott.emp where job='MANAGER' and ename='BLAKE';
+     Q.WAQTP employee whose job is manager or president
+     A.select * from scott.emp where job='MANAGER' or job='PRESIDENT';
+                  or
+       select * from scott.emp where job in ('MANAGER','PRESIDENT');
+     Q.WAQTP employees whose salaray in the range of 2000 to 3000 
+       select * from scott.emp where sal>=2000 and sal<=3000;
+                or
+       select * from scott.emp where  sal between 2000 and 3000;
+     Q.WAQTP whose employees commission is null
+       select * from scott.emp where  comm is null;
+      
+     Q.WAQTP employee whose job is not manager or president
+       A.select * from scott.emp where job!='MANAGER' or job!='PRESIDENT';
+                  or
+       select * from scott.emp where job not in ('MANAGER','PRESIDENT');
+     Q.WAQTP employees whose salaray in the  out of range  2000 to 3000 
+     select * from scott.emp where sal<=2000 and sal>=3000;
+                or
+     select * from scott.emp where  sal not between 2000 and 3000;
+     Q.WAQTP whose employees commission is not null
+       select * from scott.emp where  comm is not null;
+     Q.WAQTP whose employee name starts with A
+       select * from scott.emp where ename like 'A%' ;
+     Q.WAQTP whose employee job ends with K
+       select * from scott.emp where job like '%K' ;
+     Q.WAQTP whose employee name consist of E
+       select * from scott.emp where ename like '%E%' ;
+     Q.WAQTP whose employee name consist E in 4th index position
+      select * from scott.emp  where ename like '___E_' ;
+
+FUNCTIONS
+---------
+     -functions are pre - defined operations 
+   1.Aggregate Functions : multi row functions -- function will work on all records and
+                         returns  single output   10 records-output-1
+                       1.Sum() -numbers
+                       2.max() -strings ,numbers, date 
+                       3.min() -strings ,numbers, date 
+                       4.count()-strings, numbers,date
+                       5.avg()  -numbers
+
+  2.Scalar Functions:  single row functions --- functions will work on every single record 
+                       and returns output for each record  10 records-output is 10
+                     1.concat() - concatenation
+                     2.initcap()-it will make first character as capital and remaining as lowercase
+                     3.replace()-it will helps to replace 
+                                -3 args(1-data,2-word to be replace 3- new word) 
+                                -2 args(1-data, 2-word to be deleted) 
+                     4.substr() -it will help to get a part of string
+                                -3 args(1-data,2-start position ,3-end position) 
+                                -2 args(1-data,2-start position --it will extract until last char) 
+                     5.length() - to find length of data
+                     6.upper() - converts into upper case
+                     7.lower()  - converts into lower case
+
+   3.Date Functions: 
+                     select now() - get current date and time
+                     select current_date- gets current data
+                     select current_time-gets current time
+                     select current_timestamp - gets current timestamp 
+
+                   
+
