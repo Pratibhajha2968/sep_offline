@@ -1,4 +1,4 @@
-SQL: structured query language
+SQL: structured query language  (https://www.thoughtspot.com/sql-tutorial/)
 ----------------------------------
 
 DATA : collection of information 
@@ -285,6 +285,8 @@ Q.WAQTP the count of employee and department whose having salary more than 2000
 select count(*) as count , deptno from scott.emp where sal>=2000 group by deptno having count(*)>1 order by deptno ;
 
 
+limit : limit is a keyword which limits the output
+SELECT *   FROM tutorial.us_housing_units  order by midwest limit 10
 
 
 
@@ -309,7 +311,7 @@ Types of joins:
 1.cross join/cartesian join:
 --------------------------         
          -In this join , it returns each and every record of the table is going to be
-          matched.
+          matched and unmatched.
          -In Cross Join, if table A contains 10 records and table B contains 4 records,
           then the cross join will return 40 records. 
          -whenever we use cross join, will get correct data as well as incorrect data 
@@ -329,6 +331,11 @@ CMD: select * from tableA inner join tableB where condition;
 
 Note : condition must be matching in both the tables.
 
+Q.WAQTP list of employee whose belongs to dallas location
+select e.ename , d.loc 
+from scott.emp e inner join scott.dept d 
+on e.DEPTNO=d.DEPTNO
+where d.loc='DALLAS';
 
 
 
@@ -380,46 +387,9 @@ CMD: select * from tableA full outer join tableB on condition; // not supported 
 
 CMD:  select * from tableA a join tableA b on a.column=b.column;
 
+Q.WAQT find manager of each employee
+select e1.ename as employee, e2.ename as manager
 
+from scott.emp e1 ,scott.emp e2
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+where e2.empno=e1.mgr;
