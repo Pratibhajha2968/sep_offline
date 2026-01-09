@@ -256,7 +256,167 @@ group by:
 Q.WAQTP the count of employee whose belongs to each department
 A.select count(*) as count, deptno from scott.emp group by deptno ;
 
+Q.WAQTP the count of department , whose getting salary more than 2000
+select count(*) as count , deptno from scott.emp where sal>=2000 group by deptno order by deptno ;
+
+position of keywords
+      select 
+      from
+      where
+      group by
+      having
+      order by
+
+order/flow/execution:
+      from
+      where
+      group by
+      having
+      select
+      order by 
  
+
+where clause-- filter based on condition upon records
+having clause- filter based on condition upon groups
+             - to use having clause , we need to use group by clause 
+ 
+Q.WAQTP the count of employee and department whose having salary more than 2000
+ and department need to have more than 1 person 
+select count(*) as count , deptno from scott.emp where sal>=2000 group by deptno having count(*)>1 order by deptno ;
+
+
+
+
+
+
+
+Joins:
+------
+    - joining or merging one or more tables
+    - used to combine rows from two or more tables based on a related column 
+      between them.
+
+Types of joins:
+---------------
+           1.cross join
+           2.inner join/equi join
+           3.outer joins
+                     1.left outer join
+                     2.right outer join
+                     3.full outer join
+           4.self join
+
+1.cross join/cartesian join:
+--------------------------         
+         -In this join , it returns each and every record of the table is going to be
+          matched.
+         -In Cross Join, if table A contains 10 records and table B contains 4 records,
+          then the cross join will return 40 records. 
+         -whenever we use cross join, will get correct data as well as incorrect data 
+
+CMD: select * from tableA cross join tableB;
+     select * from tableA,tableB;
+
+2.inner join/equi join:
+----------------------
+        - it returns only the matched records.
+        - In inner join, if table A contains 10 records and table B contains 4 records,
+          then the inner join will return 4 records.
+        - for equi joins, proper condition should be given in where clause.
+
+CMD: select * from tableA inner join tableB where condition;
+     select * from tableA,tableB where condition;
+
+Note : condition must be matching in both the tables.
+
+
+
+
+3.Outer join:
+-------------
+    - it returns matched records as well as unmatched records.
+    types:
+    ------
+        1.left outer join/left join
+        2.right outer join/right join
+        3.full outer join/full join
+
+  1.left outer join:
+  =================
+           -it returns all the records from left table and 
+            matched records from right table.
+          -if there is no matched records in right table, will return null values.
+
+
+   2.right outer join/right join:
+   ==============================
+           -it returns all the records from right table and 
+            matched records from left table.
+          -if there is no matched records in left table, will return null values.
+
+
+
+
+3.outer join/full outer join/full join:
+=======================================
+           -it returns all the records from both the tables.
+           -it returns matched records as well as unmatched records.
+           -it can't achieve by using mysql syntax.
+
+CMD: select * from tableA full outer join tableB on condition; // not supported by mysql
+                   or
+     select * from tableA left join tableB on condition
+                      union
+     select * from tableA right join tableB on condition;
+       
+
+
+4.self join:
+------------
+          - joining the table with itself. 
+          - without aliasing we can't use self join.  
+          - to compare rows within same table
+          - to find the relationship between rows within same table.
+
+CMD:  select * from tableA a join tableA b on a.column=b.column;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
